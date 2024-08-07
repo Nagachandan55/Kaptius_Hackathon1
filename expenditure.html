@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Expenditure</title>
+    <link rel="stylesheet" href="expenditure.css">
+    <script>
+        function handleSubmit(event) {
+            event.preventDefault(); // Prevent form from submitting the traditional way
+
+            const description = document.getElementById('description').value;
+            const amount = parseFloat(document.getElementById('amount').value);
+
+            // Get current date and time
+            const now = new Date();
+            const date = now.toLocaleString(); // Format: MM/DD/YYYY, HH:MM:SS AM/PM
+
+            // Validate input
+            if (isNaN(amount) || amount <= 0) {
+                alert('Please enter a valid amount.');
+                return;
+            }
+
+            // Retrieve existing entries from localStorage
+            const entries = JSON.parse(localStorage.getItem('entries')) || [];
+
+            // Retrieve current total amount
+            let total = parseFloat(localStorage.getItem('totalAmount')) || 0;
+
+            // Check if the total amount is less than the expenditure
+            if (total < amount) {
+                alert(`Error: Expenditure exceeds the total amount available.`);
+                return;
+            }
+
+            // Add new expenditure entry
+            entries.push({ description, amount, date, type: 'expenditure' });
+
+            // Save updated entries to localStorage
+            localStorage.setItem('entries', JSON.stringify(entries));
+
+            // Update total amount (decrease total by expenditure amount)
+            total -= amount;
+            localStorage.setItem('totalAmount', total.toFixed(2)); // Save to localStorage, formatted to 2 decimal places
+            
+
+            alert("Amount is debited");
+            // Redirect to the main page
+            window.location.href = 'index.html';
+        }
+    </script>
+</head>
+<body>
+    <h1>Add Expenditure</h1>
+    <form onsubmit="handleSubmit(event)">
+        <label for="description">Short Description:</label>
+        <input type="text" id="description" required><br><br>
+        <label for="amount">Amount:</label>
+        <input type="number" id="amount" required><br><br>
+        <button type="submit" id="submit">Submit</button><br><br>
+    </form>
+    <a href="index.html"><button id="back">Back to home</button></a>
+</body>
+</html>

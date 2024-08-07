@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Page</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1 >Finance Management</h1>
+    <label for="Total" style="margin-left: 80%;">Total Amount :</label><br><br>
+    <input type="number" id="Total" readonly>
+    <a href="totalamount.html" id="total_b"><button>Total Amount</button></a>
+    <a href="expenditure.html" id="expenditure_b"><button>Add Expenditure</button></a>
+    <a href="income.html" id="income_b"><button>Add Income</button></a>
+    
+  
+    <div   style="display: flex; justify-content: space-around;"> 
+    <div>
+    <h2>Filter Expenditure Table</h2>
+    <form id="expenditureFilterForm" onsubmit="updateTables(); return false;">
+        <label for="expenditureStartDate">Start Date and Time:</label>
+        <input type="datetime-local" id="expenditureStartDate"><br><br>
+        <label for="expenditureEndDate">End Date and Time:</label>
+        <input type="datetime-local" id="expenditureEndDate"><br><br>
+        <button type="submit">Filter</button>
+        <button type="button" onclick="clearFilter('expenditure')">Clear Filter</button>
+    </form>
+
+    <h2>Expenditure Table</h2>
+    <table id="expenditureTable">
+        <thead>
+            <tr>
+                <th>Description</th>
+                <th>Date</th>
+                <th>Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Expenditure rows will be dynamically added here -->
+        </tbody>
+    </table>    
+    </div>
+
+    <div >
+        <h2>Filter Income Table</h2>
+        <form id="filterForm" onsubmit="updateTables(); return false;">
+            <label for="incomeStartDate">Start Date and Time:</label>
+            <input type="datetime-local" id="incomeStartDate"><br><br>
+            <label for="incomeEndDate">End Date and Time:</label>
+            <input type="datetime-local" id="incomeEndDate"><br><br>
+            <button type="submit">Filter</button>
+            <button type="button" onclick="clearFilter('income')">Clear Filter</button>
+        </form>
+
+        <h2>Income Table</h2>
+        <table id="incomeTable">
+            <thead>
+                <tr>
+                    <th>Description</th>
+                    <th>Date</th>
+                    <th>Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Income rows will be dynamically added here -->
+            </tbody>
+        </table>
+       
+    </div>
+    </div>
+ 
+    <script src="script.js"></script>
+</body>
+</html>

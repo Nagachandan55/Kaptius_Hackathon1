@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Total Amount</title>
+    <link rel="stylesheet" href="total.css">
+    <script>
+        function loadEntries() {
+            const table = document.getElementById('entriesTable');
+
+            // Retrieve all entries from localStorage
+            const entries = JSON.parse(localStorage.getItem('entries')) || [];
+
+            // Function to add rows to a table
+            function populateTable(entries) {
+                const tbody = table.querySelector('tbody');
+                tbody.innerHTML = ''; // Clear existing rows
+
+                entries.forEach(entry => {
+                    const row = document.createElement('tr');
+                    // Apply class based on entry type
+                    row.className = entry.type === 'income' ? 'income' : 'expenditure';
+                    row.innerHTML = `
+                        <td>${entry.description}</td>
+                        <td>${entry.date}</td>
+                        <td>${entry.amount}</td>
+                    `;
+                    tbody.appendChild(row);
+                });
+            }
+
+            // Populate table with sorted entries
+            populateTable(entries);
+        }
+
+        function filterEntries() {
+            const startDate = new Date(document.getElementById('startDate').value);
+            const endDate = new Date(document.getElementById('endDate').value);
+            const table = document.getElementById('entriesTable');
+
+            // Retrieve all entries from localStorage
+            const entries = JSON.parse(localStorage.getItem('entries')) || [];
+
+            // Filter entries by date range
+            const filteredEntries = entries.filter(entry => {
+                const entryDate = new Date(entry.date);
+                return entryDate >= startDate && entryDate <= endDate;
+            });
+
+            // Function to add rows to a table
+            function populateTable(entries) {
+                const tbody = table.querySelector('tbody');
+                tbody.innerHTML = ''; // Clear existing rows
+
+                entries.forEach(entry => {
+                    const row = document.createElement('tr');
+                    // Apply class based on entry type
+                    row.className = entry.type === 'income' ? 'income' : 'expenditure';
+                    row.innerHTML = `
+                        <td>${entry.description}</td>
+                        <td>${entry.date}</td>
+                        <td>${entry.amount}</td>
+                    `;
+                    tbody.appendChild(row);
+                });
+            }
+
+            // Populate table with filtered entries
+            populateTable(filteredEntries);
+        }
+
+        function clearFilter() {
+            document.getElementById('startDate').value = '';
+            document.getElementById('endDate').value = '';
+            loadEntries();
+        }
+
+        window.onload = loadEntries;
+    </script>
+</head>
+<body>
+    <h1>Total Amount</h1>
+    <h2>Filter Data</h2>
+    <label for="startDate">Start Date and Time:</label>
+    <input type="datetime-local" id="startDate"><br>
+    <label for="endDate">End Date and Time:</label>
+    <input type="datetime-local" id="endDate"><br>
+    <button onclick="filterEntries()">Filter</button>
+    <button onclick="clearFilter()">Clear Filter</button>
+    <br><br>
+    <table id="entriesTable">
+        <thead>
+            <tr>
+                <th>Description</th>
+                <th>Date</th>
+                <th>Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Rows will be dynamically added here -->
+        </tbody>
+    </table>
+    <br>
+    <a href="index.html"><button>Back to Home</button></a>
+</body>
+</html>

@@ -1,0 +1,73 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f4f4f4;
+    
+}
+
+.income {
+    background-color: #d4edda; /* Light green */
+}
+.expenditure {
+    background-color: #f8d7da; /* Light red */
+}
+table {
+    width: 500px;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+button{
+    background-color:cornflowerblue;
+    height: 20px;
+}
+
+th{
+    background-color:rgb(151, 219, 219);
+}
+
+#expenditure_b{
+    display: inline-block;
+    margin-left: 20%;
+    margin-top: 50px;
+}
+
+#income_b{
+    display: inline-block;
+    margin-left: 40%;
+    margin-top: 50px;
+}
+#total_b{
+    display: block;
+    margin-left: 80%;
+    margin-top: 30px;   
+}
+button{
+    margin-top: 10px;
+}
+#Total {
+    border: 2px solid #ddd; 
+    padding: 8px;
+    font-size: 1em;
+    width: 10%;
+    box-sizing: border-box;
+    margin-left: 80%;
+    background-color:antiquewhite;
+}
+.filter-container {
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 20px;
+}
+
+h1{
+    margin-left: 40%; 
+}
+
+button:hover{
+    background-color:#f8d7da;
+}
